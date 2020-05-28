@@ -1,8 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import "./App.scss";
 import NumberDisplay from "../NumberDisplay/NumberDisplay";
+import {generateSquares} from "../../utils/utils";
 
 const App: React.FC = () => {
+
+const[squares, setSquares] = useState(generateSquares());
+
+console.log("squares", squares);
+
 	return (
 		<div className="App">
 			<div className="Header">
