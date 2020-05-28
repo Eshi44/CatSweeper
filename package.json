@@ -1,0 +1,20 @@
+{
+  "name": "catsweeper",
+  "version": "1.0.0",
+  "description": "A twist on the classic game minesweeper 💣😸  A Node, Express, React, Typescript, Sass App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eshi44/CatSweeper.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Eshi44/CatSweeper/issues"
+  },
+  "homepage": "https://github.com/Eshi44/CatSweeper#readme"
+}
