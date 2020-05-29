@@ -32,7 +32,7 @@ const Button: React.FC<ButtonProps> = ({ row, col, state, value }) => {
 		return null;
 	};
 	return (
-		<div className={`Button ${state === SquareState.visible ? "visible" : ""}`}>
+		<div className={`Button ${state === SquareState.visible ? "visible" : ""} value-${value}`}>
 			{renderContect()}
 		</div>
 	);
