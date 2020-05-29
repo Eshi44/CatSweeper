@@ -19,7 +19,11 @@ const Button: React.FC<ButtonProps> = ({ row, col, state, value }) => {
 				);
 			}
 		} else if (state === SquareState.toy) {
-			// display toy flay
+            return (
+                <span role="img" aria-label="yarn">
+                    🎣
+                </span>
+            );
 		}
 		return null;
 	};
