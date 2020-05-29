@@ -9,7 +9,7 @@ export enum SquareValue {
 	six,
 	seven,
 	eight,
-	hairball,
+	yarn,
 }
 export enum SquareState {
 	hidden,

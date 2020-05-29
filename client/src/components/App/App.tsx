@@ -9,10 +9,10 @@ const App: React.FC = () => {
 const[squares, setSquares] = useState(generateSquares());
 
 // console.log("squares", squares);
-
+// console.log("squares", squares);
 const renderSquares = (): React.ReactNode => {
 	return squares.map((row, rowIndex) => row.map((square, colIndex)=>
-	<Button key={`${rowIndex}-${colIndex}`}/>));
+	<Button key={`${rowIndex}-${colIndex}`} state={square.state} value={square.value} row={rowIndex} col={colIndex}/>));
 };
 
 	return (
