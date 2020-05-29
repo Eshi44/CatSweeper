@@ -17,14 +17,18 @@ const Button: React.FC<ButtonProps> = ({ row, col, state, value }) => {
 						🧶
 					</span>
 				);
-			}
+            } else if (value === SquareValue.none) {
+                return null;
+            }
+            return value;
+
 		} else if (state === SquareState.toy) {
             return (
                 <span role="img" aria-label="toy">
                     🎣
                 </span>
             );
-		}
+		} 
 		return null;
 	};
 	return (

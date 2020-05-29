@@ -61,7 +61,37 @@ for (let iIndex = 0; iIndex < MAX_ROWS; iIndex++) {
 
 		// add up number of yarns
 
+		if (topLeftYarn && topLeftYarn.value === SquareValue.yarn) {
+			numberOfYarns++;
+		}
+		if (topYarn && topYarn.value === SquareValue.yarn) {
+			numberOfYarns++;
+		}
+		if (topRightYarn && topRightYarn.value === SquareValue.yarn) {
+			numberOfYarns++;
+		}
+		if (leftYarn && leftYarn.value === SquareValue.yarn) {
+			numberOfYarns++;
+		}
+		if (rightYarn && rightYarn.value === SquareValue.yarn) {
+			numberOfYarns++;
+		}
+		if (bottomLeftYarn && bottomLeftYarn.value === SquareValue.yarn) {
+			numberOfYarns++;
+		}
+		if (bottomYarn && bottomYarn.value === SquareValue.yarn) {
+			numberOfYarns++;
+		}
+		if (bottomRightYarn && bottomRightYarn.value === SquareValue.yarn) {
+			numberOfYarns++;
+		}
 
+		if (numberOfYarns >0) {
+			squares[iIndex][yIndex] = {
+				...currentSquare,
+				value: numberOfYarns
+			};
+		}
 
 	}
 }
