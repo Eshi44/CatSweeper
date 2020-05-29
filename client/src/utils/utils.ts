@@ -39,5 +39,32 @@ export const generateSquares = (): Square[][] => {
 		}
 	}
 
+// calculate numbers for each square
+for (let iIndex = 0; iIndex < MAX_ROWS; iIndex++) {
+	for (let yIndex = 0; yIndex < MAX_COLS; yIndex++) {
+		const currentSquare = squares[iIndex][yIndex];
+		if (currentSquare.value === SquareValue.yarn) {
+			continue;
+		}
+
+		// take into account squares with a border
+		let numberOfYarns = 0;
+		const topLeftYarn = iIndex>0 && yIndex >0 ? squares[iIndex - 1][yIndex -1]: null;
+		const topYarn = iIndex>0 ? squares[iIndex - 1][yIndex] :null;
+		const topRightYarn = iIndex>0 && yIndex < MAX_COLS - 1 ? squares[iIndex - 1][yIndex +1]: null;
+		const leftYarn = iIndex>0 ? squares[iIndex][yIndex - 1] :null;
+		const rightYarn = iIndex < MAX_COLS -1 ? squares[iIndex][yIndex + 1]: null;
+		const bottomLeftYarn = iIndex < MAX_ROWS - 1 && yIndex > 0 ? squares[iIndex + 1][yIndex -1]: null;
+		const bottomYarn =iIndex < MAX_ROWS - 1 ? squares[iIndex + 1][yIndex]: null;
+		const bottomRightYarn = iIndex < MAX_ROWS - 1 && yIndex < MAX_COLS -1 ? squares[iIndex +1][yIndex + 1] : null;
+
+
+		// add up number of yarns
+
+
+
+	}
+}
+
 	return squares;
 };

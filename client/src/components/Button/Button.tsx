@@ -20,7 +20,7 @@ const Button: React.FC<ButtonProps> = ({ row, col, state, value }) => {
 			}
 		} else if (state === SquareState.toy) {
             return (
-                <span role="img" aria-label="yarn">
+                <span role="img" aria-label="toy">
                     🎣
                 </span>
             );
