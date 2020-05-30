@@ -26,9 +26,24 @@ const App: React.FC = () => {
 		window.removeEventListener("mouseup", handleMouseUp);
 	}, []);
 
+	// useEffect will open happen in running state changes
+	useEffect(()=>{
+		if(running) {
+			const timer= setInterval(()=>{
+				setTime(time +1);
+			}, 1000);
+
+			return () => {
+			clearInterval(timer);
+		};
+	}
+	}, [running, time]);
+
 	const handleSquareClick = (rowParam: number, colParam: number) => (): void => {
 		// console.log(rowParam, colParam);
-		
+		// starting the game
+		if(!running)
+		setRunning(true);
 	};
 
 	// console.log("squares", squares);
