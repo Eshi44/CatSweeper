@@ -11,7 +11,7 @@ export const generateSquares = (): Square[][] => {
 		for (let y = 0; y < MAX_COLS; y++) {
 			squares[i].push({
 				value: SquareValue.none,
-				state: SquareState.visible,  //change default back to hidden
+				state: SquareState.hidden,  //change default back to hidden
 			});
 		}
 	}

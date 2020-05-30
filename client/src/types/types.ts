@@ -17,3 +17,10 @@ export enum SquareState {
 	toy,
 }
 export type Square = { value: SquareValue; state: SquareState };
+
+export enum CatFace {
+	smile = "🐱",
+	weary = "🙀",
+	lost = "😿",
+	won = "😺",
+}
