@@ -46,6 +46,14 @@ const App: React.FC = () => {
 		setRunning(true);
 	};
 
+	const handleCatFaceClick = (): void => {
+		if(running) {
+			setRunning(false);
+			setTime(0);
+			setSquares(generateSquares());
+		}
+	};
+
 	// console.log("squares", squares);
 	// console.log("squares", squares);
 	const renderSquares = (): React.ReactNode => {
@@ -67,7 +75,7 @@ const App: React.FC = () => {
 		<div className="App">
 			<div className="Header">
 				<NumberDisplay value={0} />
-				<div className="CatFace">
+				<div className="CatFace" onClick={handleCatFaceClick}>
 					<span role="img" aria-label="cat face">
 						{Catface}
 					</span>
