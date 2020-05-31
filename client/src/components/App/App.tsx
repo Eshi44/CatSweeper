@@ -4,7 +4,7 @@ import NumberDisplay from "../NumberDisplay/NumberDisplay";
 import { generateSquares, openManySquares } from "../../utils/utils";
 import Button from "../Button/Button";
 import { CatFace, Square, SquareState, SquareValue } from "../../types/types";
-import { clearLine } from "readline";
+import {MAX_ROWS, MAX_COLS} from "../../constants/constants";
 
 const App: React.FC = () => {
 	const [squares, setSquares] = useState<Square[][]>(generateSquares());
@@ -13,6 +13,7 @@ const App: React.FC = () => {
 	const [running, setRunning] = useState<boolean>(false);
 	const [yarnCounter, setYarnCounter] = useState<number>(10);
 	const [loser, setLoser] = useState<boolean>(false);
+	const [winner, setWinner] = useState<boolean>(false);
 
 	useEffect(() => {
 		const handleMouseDown = () => {
@@ -49,17 +50,36 @@ const App: React.FC = () => {
 		}
 	}, [loser]);
 
+	useEffect(()=>{
+		if(winner) {
+			setRunning(false);
+			setCatFace(CatFace.won);
+		}
+	}, [winner])
+
 	const handleSquareClick = (
 		rowParam: number,
 		colParam: number
 	) => (): void => {
 		// console.log(rowParam, colParam);
+		
+	
+		let newSquares = squares.slice();
 		// starting the game
 		if (!running) {
+				
+				let isYarn = newSquares[rowParam][colParam].value === SquareValue.yarn;
+				while (isYarn) {
+					newSquares = generateSquares();
+					if (newSquares[rowParam][colParam].value !== SquareValue.yarn) {
+						isYarn = false;
+						break;
+					}
+				}
 			setRunning(true);
 		}
-		const currentSquare = squares[rowParam][colParam];
-		let newSquares = squares.slice();
+		const currentSquare = newSquares[rowParam][colParam];
+
 
 		if (
 			currentSquare.state === SquareState.toy ||
@@ -74,13 +94,40 @@ const App: React.FC = () => {
 			newSquares[rowParam][colParam].red = true;
 			newSquares =revealYarns();
 			setSquares(newSquares);
+			return;
 		} else if (currentSquare.value === SquareValue.none) {
 			newSquares = openManySquares(newSquares, rowParam, colParam);
-			setSquares(newSquares);
 		} else {
 			newSquares[rowParam][colParam].state = SquareState.visible;
-			setSquares(newSquares);
 		}
+
+		// check to see if user won - check that there are no more available spaces to click(squares without yarns)
+		let availableSquaresExist =false;
+		for (let row=0;row< MAX_ROWS; row++) {
+			for (let col=0; col< MAX_COLS; col++) {
+				// check
+				const currentSquare = newSquares[row][col];
+				if (currentSquare.value !== SquareValue.yarn && currentSquare.state === SquareState.hidden) {
+					availableSquaresExist = true;
+					break;
+				}
+			}
+		}
+
+		if(!availableSquaresExist) {
+			newSquares = newSquares.map (row => row.map(square => {
+				if(square.value === SquareValue.yarn) {
+					return {
+						...square,
+						state: SquareState.toy
+					}
+				}
+				return square;
+			}))
+			setWinner(true);
+		}
+		setSquares(newSquares);
+	
 	};
 
 	const handleSquareContext = (rowParam: number, colParam: number) => (
@@ -116,6 +163,8 @@ const App: React.FC = () => {
 			setTime(0);
 			setSquares(generateSquares());
 			setLoser(false);
+			setWinner(false);
+			setYarnCounter(10);
 		
 	};
 
