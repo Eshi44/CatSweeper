@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.scss";
 import NumberDisplay from "../NumberDisplay/NumberDisplay";
-import { generateSquares } from "../../utils/utils";
+import { generateSquares, openManySquares } from "../../utils/utils";
 import Button from "../Button/Button";
 import { CatFace, Square, SquareState, SquareValue } from "../../types/types";
 
@@ -47,7 +47,7 @@ const App: React.FC = () => {
 		setRunning(true);
 		}
 		const currentSquare = squares[rowParam][colParam];
-		const newSquares = squares.slice();
+		let newSquares = squares.slice();
 
 		if (currentSquare.state === SquareState.toy || currentSquare.state === SquareState.visible) {
 			return;
@@ -56,6 +56,9 @@ const App: React.FC = () => {
 		if (currentSquare.value === SquareValue.yarn) {
 
 		} else if (currentSquare.value === SquareValue.none) {
+
+			newSquares = openManySquares(newSquares, rowParam, colParam);
+			setSquares(newSquares);
 
 		} else {
 			newSquares[rowParam][colParam].state = SquareState.visible;
