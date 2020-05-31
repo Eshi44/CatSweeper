@@ -10,6 +10,7 @@ const App: React.FC = () => {
 	const [Catface, setCatFace] = useState<CatFace>(CatFace.smile);
 	const [time, setTime] = useState<number>(0);
 	const [running, setRunning] = useState<boolean>(false);
+	const [yarnCounter, setYarnCounter] = useState<number>(10);
 
 	useEffect(() => {
 		const handleMouseDown = () => {
@@ -28,7 +29,7 @@ const App: React.FC = () => {
 
 	// useEffect will open happen in running state changes
 	useEffect(()=>{
-		if(running) {
+		if(running && time <999) {
 			const timer= setInterval(()=>{
 				setTime(time +1);
 			}, 1000);
@@ -51,6 +52,11 @@ const App: React.FC = () => {
 		e.preventDefault();
 		// console.log("right click is working!");
 
+		// can only place a toy when game is running
+		if(!running) {
+			return;
+		}
+
 		const currentSquares = squares.slice();
 		const currentSquare =squares[rowParam][colParam];
 
@@ -59,6 +65,12 @@ const App: React.FC = () => {
 		} else if (currentSquare.state === SquareState.hidden) {
 			currentSquares[rowParam][colParam].state = SquareState.toy;
 			setSquares(currentSquares);
+			setYarnCounter(yarnCounter -1);
+		} else if (currentSquare.state === SquareState.toy) {
+			currentSquares[rowParam][colParam].state = SquareState.hidden;
+			setSquares(currentSquares);
+			setYarnCounter(yarnCounter +1);
+
 		}
 
 	};
@@ -92,7 +104,7 @@ const App: React.FC = () => {
 	return (
 		<div className="App">
 			<div className="Header">
-				<NumberDisplay value={0} />
+				<NumberDisplay value={yarnCounter} />
 				<div className="CatFace" onClick={handleCatFaceClick}>
 					<span role="img" aria-label="cat face">
 						{Catface}
