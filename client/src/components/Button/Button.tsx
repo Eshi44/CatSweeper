@@ -4,6 +4,7 @@ import { SquareState, SquareValue } from "../../types/types";
 interface ButtonProps {
 	row: number;
 	col: number;
+	red?:boolean;
 	state: SquareState;
 	value: SquareValue;
 	// generic void function that takes in any amount of arguments and returns void
@@ -11,7 +12,7 @@ interface ButtonProps {
 	onContext(rowParam: number, colParam: number): (...args: any[]) => void;
 }
 
-const Button: React.FC<ButtonProps> = ({ row, col, onClick, onContext, state, value }) => {
+const Button: React.FC<ButtonProps> = ({ row, col, onClick, red, onContext, state, value }) => {
 	const renderContect = (): React.ReactNode => {
 		if (state === SquareState.visible) {
 			if (value === SquareValue.yarn) {
@@ -37,7 +38,7 @@ const Button: React.FC<ButtonProps> = ({ row, col, onClick, onContext, state, va
 		<div
 			className={`Button ${
 				state === SquareState.visible ? "visible" : ""
-			} value-${value}`}
+			} value-${value} ${red ? "red" : ""}`}
 			onClick={onClick(row, col)}
 			onContextMenu={onContext(row, col)}
 		>

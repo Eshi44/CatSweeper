@@ -16,7 +16,7 @@ export enum SquareState {
 	visible,
 	toy,
 }
-export type Square = { value: SquareValue; state: SquareState };
+export type Square = { value: SquareValue; state: SquareState; red?: boolean };
 
 export enum CatFace {
 	smile = "🐱",

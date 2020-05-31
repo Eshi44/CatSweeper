@@ -4,6 +4,7 @@ import NumberDisplay from "../NumberDisplay/NumberDisplay";
 import { generateSquares, openManySquares } from "../../utils/utils";
 import Button from "../Button/Button";
 import { CatFace, Square, SquareState, SquareValue } from "../../types/types";
+import { clearLine } from "readline";
 
 const App: React.FC = () => {
 	const [squares, setSquares] = useState<Square[][]>(generateSquares());
@@ -70,6 +71,7 @@ const App: React.FC = () => {
 		if (currentSquare.value === SquareValue.yarn) {
 			// if click on yarn
 			setLoser(true);
+			newSquares[rowParam][colParam].red = true;
 			newSquares =revealYarns();
 			setSquares(newSquares);
 		} else if (currentSquare.value === SquareValue.none) {
@@ -109,12 +111,12 @@ const App: React.FC = () => {
 	};
 
 	const handleCatFaceClick = (): void => {
-		if (running) {
+
 			setRunning(false);
 			setTime(0);
 			setSquares(generateSquares());
 			setLoser(false);
-		}
+		
 	};
 
 	// console.log("squares", squares);
@@ -129,6 +131,7 @@ const App: React.FC = () => {
 					onContext={handleSquareContext}
 					value={square.value}
 					row={rowIndex}
+					red={square.red}
 					col={colIndex}
 				/>
 			))
