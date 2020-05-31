@@ -3,7 +3,7 @@ import "./App.scss";
 import NumberDisplay from "../NumberDisplay/NumberDisplay";
 import { generateSquares } from "../../utils/utils";
 import Button from "../Button/Button";
-import { CatFace, Square } from "../../types/types";
+import { CatFace, Square, SquareState } from "../../types/types";
 
 const App: React.FC = () => {
 	const [squares, setSquares] = useState<Square[][]>(generateSquares());
@@ -46,6 +46,23 @@ const App: React.FC = () => {
 		setRunning(true);
 	};
 
+
+	const handleSquareContext = (rowParam: number, colParam: number) => (e: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
+		e.preventDefault();
+		// console.log("right click is working!");
+
+		const currentSquares = squares.slice();
+		const currentSquare =squares[rowParam][colParam];
+
+		if (currentSquare.state === SquareState.visible) {
+			return;
+		} else if (currentSquare.state === SquareState.hidden) {
+			currentSquares[rowParam][colParam].state = SquareState.toy;
+			setSquares(currentSquares);
+		}
+
+	};
+
 	const handleCatFaceClick = (): void => {
 		if(running) {
 			setRunning(false);
@@ -63,6 +80,7 @@ const App: React.FC = () => {
 					key={`${rowIndex}-${colIndex}`}
 					state={square.state}
 					onClick = {handleSquareClick}
+					onContext = {handleSquareContext}
 					value={square.value}
 					row={rowIndex}
 					col={colIndex}

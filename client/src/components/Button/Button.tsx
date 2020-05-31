@@ -8,9 +8,10 @@ interface ButtonProps {
 	value: SquareValue;
 	// generic void function that takes in any amount of arguments and returns void
 	onClick(rowParam: number, colParam: number): (...args: any[]) => void;
+	onContext(rowParam: number, colParam: number): (...args: any[]) => void;
 }
 
-const Button: React.FC<ButtonProps> = ({ row, col, onClick, state, value }) => {
+const Button: React.FC<ButtonProps> = ({ row, col, onClick, onContext, state, value }) => {
 	const renderContect = (): React.ReactNode => {
 		if (state === SquareState.visible) {
 			if (value === SquareValue.yarn) {
@@ -38,6 +39,7 @@ const Button: React.FC<ButtonProps> = ({ row, col, onClick, state, value }) => {
 				state === SquareState.visible ? "visible" : ""
 			} value-${value}`}
 			onClick={onClick(row, col)}
+			onContextMenu={onContext(row, col)}
 		>
 			{renderContect()}
 		</div>
