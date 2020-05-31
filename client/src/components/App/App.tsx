@@ -11,6 +11,7 @@ const App: React.FC = () => {
 	const [time, setTime] = useState<number>(0);
 	const [running, setRunning] = useState<boolean>(false);
 	const [yarnCounter, setYarnCounter] = useState<number>(10);
+	const [loser, setLoser] = useState<boolean>(false);
 
 	useEffect(() => {
 		const handleMouseDown = () => {
@@ -40,6 +41,13 @@ const App: React.FC = () => {
 	}
 	}, [running, time]);
 
+	useEffect(()=> {
+		if(loser) {
+			setCatFace(CatFace.lost);
+			setRunning(false);
+		}
+	}, [loser]);
+
 	const handleSquareClick = (rowParam: number, colParam: number) => (): void => {
 		// console.log(rowParam, colParam);
 		// starting the game
@@ -54,6 +62,8 @@ const App: React.FC = () => {
 		}
 
 		if (currentSquare.value === SquareValue.yarn) {
+			// if click on yarn
+			setLoser(true);
 
 		} else if (currentSquare.value === SquareValue.none) {
 
@@ -99,6 +109,7 @@ const App: React.FC = () => {
 			setRunning(false);
 			setTime(0);
 			setSquares(generateSquares());
+			setLoser(false);
 		}
 	};
 
