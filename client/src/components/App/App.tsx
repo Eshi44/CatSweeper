@@ -3,7 +3,7 @@ import "./App.scss";
 import NumberDisplay from "../NumberDisplay/NumberDisplay";
 import { generateSquares } from "../../utils/utils";
 import Button from "../Button/Button";
-import { CatFace, Square, SquareState } from "../../types/types";
+import { CatFace, Square, SquareState, SquareValue } from "../../types/types";
 
 const App: React.FC = () => {
 	const [squares, setSquares] = useState<Square[][]>(generateSquares());
@@ -43,8 +43,24 @@ const App: React.FC = () => {
 	const handleSquareClick = (rowParam: number, colParam: number) => (): void => {
 		// console.log(rowParam, colParam);
 		// starting the game
-		if(!running)
+		if(!running) {
 		setRunning(true);
+		}
+		const currentSquare = squares[rowParam][colParam];
+		const newSquares = squares.slice();
+
+		if (currentSquare.state === SquareState.toy || currentSquare.state === SquareState.visible) {
+			return;
+		}
+
+		if (currentSquare.value === SquareValue.yarn) {
+
+		} else if (currentSquare.value === SquareValue.none) {
+
+		} else {
+			newSquares[rowParam][colParam].state = SquareState.visible;
+			setSquares(newSquares);
+		}
 	};
 
 
