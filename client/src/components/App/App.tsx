@@ -5,6 +5,7 @@ import { generateSquares, openManySquares } from "../../utils/utils";
 import Button from "../Button/Button";
 import { CatFace, Square, SquareState, SquareValue } from "../../types/types";
 import {MAX_ROWS, MAX_COLS} from "../../constants/constants";
+import Nav from "../Nav/Nav";
 
 const App: React.FC = () => {
 	const [squares, setSquares] = useState<Square[][]>(generateSquares());
@@ -205,6 +206,8 @@ const App: React.FC = () => {
 	};
 
 	return (
+		<>
+		<Nav />
 		<div className="App">
 			<div className="Header">
 				<NumberDisplay value={yarnCounter} />
@@ -217,6 +220,7 @@ const App: React.FC = () => {
 			</div>
 			<div className="Body">{renderSquares()}</div>
 		</div>
+		</>
 	);
 };
 export default App;

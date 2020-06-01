@@ -1,5 +1,9 @@
 @import "../../styles/index.scss";
 
+html, body {
+	background-color: #acf0e2;
+}
+
 .App {
 	@include borders(white, #999);
 	padding: 16px;
