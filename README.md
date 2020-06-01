@@ -42,6 +42,8 @@ THEN I will see the excited cat face
 
 # Preview
 
->![CatSweeper-gif](client/src/images/cat-sweeper-gif.gif)
+>![CatSweeper-gif](client/src/images/CatSweeperGif.gif)
 
->![CatSweeper](client/src/images/catSweeper.JPG)
+>![CatSweeper](client/src/images/CatSweeperPage.JPG)
+
+>![CatSweeper](client/src/images/CatSweeperWon.JPG)
