@@ -29,6 +29,7 @@ THEN I will see the excited cat face
 - Express
 - Heroku
 - HTML & CSS
+- JavaScript
 - Node.js
 - NPM:
   - concurrently
